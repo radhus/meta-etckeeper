@@ -11,6 +11,8 @@ SRC_URI = " \
     git://github.com/joeyh/etckeeper.git \
     file://0001-Remove-etckeeper.spec-build-target.patch \
     file://0002-Remove-all-usage-of-perl.patch \
+    file://0003-Use-ETCKEEPER_DEST-if-present-in-.d-scripts.patch \
+    file://0004-Allow-bashisms-force-bash.patch \
     file://etckeeper.conf \
     "
 SRCREV = "214332b020b03e603d84ab3327f1c17509b49c47"
@@ -26,4 +28,14 @@ do_configure() {
 
 do_install() {
    oe_runmake DESTDIR="${D}" install
+    if [ "${PN}" = "etckeeper-native" ];
+    then
+        # Hack to install '/etc/etckeeper' somewhere in the sysroot
+        install -d -m 0755 ${D}${libdir}/etckeeper
+        cp -dR ${S}/*.d ${D}${libdir}/etckeeper/
+        install -m 0755 ${S}/etckeeper.conf ${D}${libdir}/etckeeper/
+    fi
 }
+
+
+BBCLASSEXTEND = "native"

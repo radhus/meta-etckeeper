@@ -1,10 +1,10 @@
 From 014a9a3dd0ff1a36eed75f5c7f9a07f9c1cf814b Mon Sep 17 00:00:00 2001
 From: William Johansson <radar@radhuset.org>
 Date: Wed, 16 Apr 2014 23:29:10 +0200
-Subject: [PATCH 1/2] Remove etckeeper.spec build target
+Subject: [PATCH 1/4] Remove etckeeper.spec build target
 
 ---
- Makefile |    9 ++-------
+ Makefile | 9 ++-------
  1 file changed, 2 insertions(+), 7 deletions(-)
 
 diff --git a/Makefile b/Makefile
@@ -34,5 +34,5 @@ index cb1ca18..0e85953 100644
 -
 -.PHONY: etckeeper.spec
 -- 
-1.7.10.4
+1.9.1
 

@@ -1,13 +1,13 @@
 From b849b25c9f2a1b6dd1fcd1a15cfde30e00faf0fa Mon Sep 17 00:00:00 2001
 From: William Johansson <radar@radhuset.org>
 Date: Wed, 16 Apr 2014 23:28:01 +0200
-Subject: [PATCH 2/2] Remove all usage of perl.
+Subject: [PATCH 2/4] Remove all usage of perl.
 
 All parts rewritten in bourne shell, or using standard utilities.
 ---
- commit.d/50vcs-commit         |    2 +-
- etckeeper                     |   15 ++++--------
- pre-commit.d/30store-metadata |   52 ++++++++++++++---------------------------
+ commit.d/50vcs-commit         |  2 +-
+ etckeeper                     | 15 ++++---------
+ pre-commit.d/30store-metadata | 52 +++++++++++++++----------------------------
  3 files changed, 23 insertions(+), 46 deletions(-)
 
 diff --git a/commit.d/50vcs-commit b/commit.d/50vcs-commit
@@ -116,5 +116,5 @@ index 9e2792f..d6afbb6 100755
  	if [ -f .metadata ]; then
  		# remove obsolete .metadata file
 -- 
-1.7.10.4
+1.9.1
 
