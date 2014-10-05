@@ -20,7 +20,7 @@ S = "${WORKDIR}/git"
 
 LIC_FILES_CHKSUM = "file://GPL;md5=751419260aa954499f7abaabaa882bbe"
 
-FILESEXTRAPATHS := "${THISDIR}"
+FILESEXTRAPATHS_append := "${THISDIR}"
 
 do_configure() {
     cp ${WORKDIR}/etckeeper.conf ${S}
