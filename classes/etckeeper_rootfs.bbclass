@@ -1,5 +1,9 @@
 inherit image_types
 
+
+ETCKEEPER_REBASE_REPO ??= ""
+ETCKEEPER_REBASE_REV ??= "master"
+
 etckeeper_rootfs_pre () {
     # Since we don't have /etc/etckeeper in the image yet, we take it
     # from the sysroot
@@ -15,6 +19,16 @@ etckeeper_rootfs_post () {
     export ETCKEEPER_DEST=${IMAGE_ROOTFS}
     export ETCKEEPER_REPO=${ETCKEEPER_DEST}${sysconfdir}
     etckeeper commit -d ${ETCKEEPER_REPO} "${IMAGE_NAME}: rootfs creation"
+    cd ${ETCKEEPER_REPO}
+    if [ "${ETCKEEPER_REBASE_REPO}" != "" ]; then
+        git fetch "${ETCKEEPER_REBASE_REPO}" "${ETCKEEPER_REBASE_REV}"
+        # recreate the commit with a new parent
+        git reset --soft FETCH_HEAD
+        git commit -C "HEAD@{1}"
+    fi
+    # cleanup repo
+    git reflog expire --expire=now --all
+    git gc --aggressive --prune=now
 }
 
 ROOTFS_PREPROCESS_COMMAND += "etckeeper_rootfs_pre ; "
