@@ -41,6 +41,8 @@ IMAGE_CMD_etckeeper-bare () {
     git init --bare
     cd ${IMAGE_ROOTFS}${sysconfdir}
     git push file://${DEPLOY_ETC} master
+    rm -f ${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.etc.git
+    ln -s ${IMAGE_NAME}.etc.git ${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.etc.git
 }
 
 do_rootfs[depends] += "etckeeper-native:do_populate_sysroot"
