@@ -5,7 +5,7 @@ DESCRIPTION = "Store /etc in git, mercurial, bzr or darcs"
 HOMEPAGE = "http://kitenet.net/~joey/code/etckeeper/"
 LICENSE = "GPLv2"
 DEPENDS = ""
-RDEPENDS_${PN} = "git"
+RDEPENDS_${PN} = "git bash"
 
 SRC_URI = " \
     git://github.com/joeyh/etckeeper.git \
