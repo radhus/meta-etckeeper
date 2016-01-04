@@ -1,0 +1,38 @@
+From 014a9a3dd0ff1a36eed75f5c7f9a07f9c1cf814b Mon Sep 17 00:00:00 2001
+From: William Johansson <radar@radhuset.org>
+Date: Wed, 16 Apr 2014 23:29:10 +0200
+Subject: [PATCH 1/4] Remove etckeeper.spec build target
+
+---
+ Makefile | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index cb1ca18..0e85953 100644
+--- a/Makefile
++++ b/Makefile
+@@ -14,7 +14,7 @@ INSTALL=install
+ INSTALL_EXE=${INSTALL} -D
+ INSTALL_DATA=${INSTALL} -m 0644 -D
+ 
+-build: etckeeper.spec
++build:
+ 	-./etckeeper-bzr/__init__.py build || echo "** bzr support not built"
+ 	
+ install:
+@@ -42,11 +42,6 @@ endif
+ 	-./etckeeper-bzr/__init__.py install --root=$(DESTDIR) ${PYTHON_INSTALL_OPTS} || echo "** bzr support not installed"
+ 	echo "** installation successful"
+ 
+-clean: etckeeper.spec
++clean:
+ 	rm -rf build
+ 
+-etckeeper.spec:
+-	sed -i~ "s/Version:.*/Version: $$(perl -e '$$_=<>;print m/\((.*?)\)/'<debian/changelog)/" etckeeper.spec
+-	rm -f etckeeper.spec~
+-
+-.PHONY: etckeeper.spec
+-- 
+1.9.1
+

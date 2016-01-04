@@ -1,0 +1,22 @@
+From 95458ddf78ea500514d70730e88a18088885b413 Mon Sep 17 00:00:00 2001
+From: William Johansson <radar@radhuset.org>
+Date: Tue, 10 Jun 2014 00:27:19 +0200
+Subject: [PATCH 4/4] Allow bashisms (force bash)
+
+---
+ pre-commit.d/30store-metadata | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pre-commit.d/30store-metadata b/pre-commit.d/30store-metadata
+index d6afbb6..0362ca4 100755
+--- a/pre-commit.d/30store-metadata
++++ b/pre-commit.d/30store-metadata
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ set -e
+ 
+ # Filters out UNKNOWN users and groups, prints a warning on stderr.
+-- 
+1.9.1
+
