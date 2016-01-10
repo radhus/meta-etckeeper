@@ -46,3 +46,5 @@ IMAGE_CMD_etckeeper-bare () {
 }
 
 do_rootfs[depends] += "etckeeper-native:do_populate_sysroot"
+
+IMAGE_INSTALL_append = "etckeeper"
