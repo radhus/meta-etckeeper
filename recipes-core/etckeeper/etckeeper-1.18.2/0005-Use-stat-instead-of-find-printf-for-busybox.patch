@@ -1,0 +1,27 @@
+From 65925e0552301c5780a299a762e1d1b083d3fcbc Mon Sep 17 00:00:00 2001
+From: William Johansson <radar@radhuset.org>
+Date: Sun, 10 Jan 2016 23:10:42 +0100
+Subject: [PATCH 5/5] Use stat instead of find printf for busybox
+
+Busybox find may not always support -printf flag, but stat is more likely to be
+supported.
+---
+ commit.d/50vcs-commit | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/commit.d/50vcs-commit b/commit.d/50vcs-commit
+index 43af353..f4b3159 100755
+--- a/commit.d/50vcs-commit
++++ b/commit.d/50vcs-commit
+@@ -35,7 +35,7 @@ else
+ 	# try to check tty ownership, in case user su'd to root
+ 	TTY="$(tty 2>/dev/null || true)"
+ 	if [ -n "$TTY" ] && [ -c "$TTY" ]; then
+-		USER="$(find "$TTY" -printf "%u")"
++        USER="$(stat -c "%U" "$TTY")"
+ 	fi
+ fi
+ 
+-- 
+2.5.4
+

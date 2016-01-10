@@ -13,6 +13,7 @@ SRC_URI = " \
     file://0002-Remove-all-usage-of-perl.patch \
     file://0003-Use-ETCKEEPER_DEST-if-present-in-.d-scripts.patch \
     file://0004-Allow-bashisms-force-bash.patch \
+    file://0005-Use-stat-instead-of-find-printf-for-busybox.patch \
     file://etckeeper.conf \
     "
 SRCREV = "5a635844e896d65027b092f7e2fb1bea7938ba3e"
