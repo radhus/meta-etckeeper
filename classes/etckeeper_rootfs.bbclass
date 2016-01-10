@@ -29,6 +29,8 @@ etckeeper_rootfs_post () {
     # cleanup repo
     git reflog expire --expire=now --all
     git gc --aggressive --prune=now
+    # cleanout references to the project
+    sed -i "s#pre-commit -d .*#pre-commit -d ${sysconfdir}#" ${IMAGE_ROOTFS}${sysconfdir}/.git/hooks/pre-commit
 }
 
 ROOTFS_PREPROCESS_COMMAND += "etckeeper_rootfs_pre ; "
