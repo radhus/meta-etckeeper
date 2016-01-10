@@ -9,10 +9,11 @@ Include the layer in your `bbclasses.conf`.
 
 ### Creation
 
-Include the rootfs class as in your configuration:
+Include the rootfs class and image type as in your configuration:
 
 ```shell
-IMAGE_FSTYPES = "etckeeper-bare"
+IMAGE_CLASSES += "etckeeper_rootfs"
+IMAGE_FSTYPES += "etckeeper-bare"
 ```
 
 This will initialize `/etc` on your normal rootfs as a Git repository using etckeeper, and also deploy this as a bare Git repo in your deploy directory.
