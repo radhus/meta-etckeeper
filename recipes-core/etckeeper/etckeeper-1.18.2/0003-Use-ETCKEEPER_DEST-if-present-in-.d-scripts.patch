@@ -1,37 +1,39 @@
-From 7f4647e0b6ca79f920b6d204d0d8da5d5b069088 Mon Sep 17 00:00:00 2001
+From c785a56ab1b8fe789c5a9a66edc21b08d1388785 Mon Sep 17 00:00:00 2001
 From: William Johansson <radar@radhuset.org>
 Date: Tue, 10 Jun 2014 00:10:31 +0200
 Subject: [PATCH 3/4] Use ${ETCKEEPER_DEST} if present in *.d scripts
 
 ---
- post-install.d/50vcs-commit | 2 +-
- pre-install.d/10packagelist | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ post-install.d/50vcs-commit | 3 +--
+ pre-install.d/10packagelist | 6 +++---
+ 2 files changed, 4 insertions(+), 5 deletions(-)
 
 diff --git a/post-install.d/50vcs-commit b/post-install.d/50vcs-commit
-index 7710c4a..39f4ae5 100755
+index 53138c8..6c98445 100755
 --- a/post-install.d/50vcs-commit
 +++ b/post-install.d/50vcs-commit
-@@ -1,7 +1,7 @@
+@@ -1,7 +1,6 @@
  #!/bin/sh
  set -e
- 		
+-
 -pl="/var/cache/etckeeper/packagelist"
 +pl="${ETCKEEPER_DEST}/var/cache/etckeeper/packagelist"
  
  if etckeeper unclean; then
  	message="committing changes in /etc after $HIGHLEVEL_PACKAGE_MANAGER run"
 diff --git a/pre-install.d/10packagelist b/pre-install.d/10packagelist
-index e5fefa8..0fb5f7f 100755
+index fbd4ac3..307dc70 100755
 --- a/pre-install.d/10packagelist
 +++ b/pre-install.d/10packagelist
-@@ -1,4 +1,4 @@
+@@ -1,5 +1,5 @@
  #!/bin/sh
  # This list will be later used when committing.
 -mkdir -p /var/cache/etckeeper/
 -etckeeper list-installed > /var/cache/etckeeper/packagelist.pre-install
+-etckeeper list-installed fmt > /var/cache/etckeeper/packagelist.fmt
 +mkdir -p ${ETCKEEPER_DEST}/var/cache/etckeeper/
 +etckeeper list-installed > ${ETCKEEPER_DEST}/var/cache/etckeeper/packagelist.pre-install
++etckeeper list-installed fmt > ${ETCKEEPER_DEST}/var/cache/etckeeper/packagelist.fmt
 -- 
-1.9.1
+2.5.4
 

@@ -15,7 +15,7 @@ SRC_URI = " \
     file://0004-Allow-bashisms-force-bash.patch \
     file://etckeeper.conf \
     "
-SRCREV = "214332b020b03e603d84ab3327f1c17509b49c47"
+SRCREV = "5a635844e896d65027b092f7e2fb1bea7938ba3e"
 S = "${WORKDIR}/git"
 
 LIC_FILES_CHKSUM = "file://GPL;md5=751419260aa954499f7abaabaa882bbe"

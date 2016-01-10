@@ -1,38 +1,24 @@
-From b849b25c9f2a1b6dd1fcd1a15cfde30e00faf0fa Mon Sep 17 00:00:00 2001
+From dbca4b55aa59b1752c3cec2b0f1aadd04171289d Mon Sep 17 00:00:00 2001
 From: William Johansson <radar@radhuset.org>
 Date: Wed, 16 Apr 2014 23:28:01 +0200
 Subject: [PATCH 2/4] Remove all usage of perl.
 
 All parts rewritten in bourne shell, or using standard utilities.
 ---
- commit.d/50vcs-commit         |  2 +-
  etckeeper                     | 15 ++++---------
  pre-commit.d/30store-metadata | 52 +++++++++++++++----------------------------
- 3 files changed, 23 insertions(+), 46 deletions(-)
+ 2 files changed, 22 insertions(+), 45 deletions(-)
 
-diff --git a/commit.d/50vcs-commit b/commit.d/50vcs-commit
-index 7c6173f..75fee63 100755
---- a/commit.d/50vcs-commit
-+++ b/commit.d/50vcs-commit
-@@ -43,7 +43,7 @@ if [ "$VCS" = git ] && [ -d .git ]; then
- 	if [ -n "$USER" ]; then
- 		# Use user.name and user.email from the gitconfig belonging
- 		# to the user who became root.
--		USER_HOME="$(perl -e 'print ((getpwnam(shift()))[7])' "$USER")"
-+		USER_HOME="$(getent passwd "$USER"|cut -d: -f6)"
- 		if [ -n "$USER_HOME" ] && [ -e "$USER_HOME/.gitconfig" ]; then
- 			if [ -z "$GIT_AUTHOR_NAME" ]; then
- 				GIT_AUTHOR_NAME="$(git config -f "$USER_HOME/.gitconfig" user.name)" || true
 diff --git a/etckeeper b/etckeeper
-index 1498b96..68d4765 100755
+index d85ebb6..c9f8d6b 100755
 --- a/etckeeper
 +++ b/etckeeper
-@@ -111,15 +111,8 @@ if [ -z "$VCS" ]; then
+@@ -120,15 +120,8 @@ if [ -z "$VCS" ]; then
  fi
  export VCS
  
 -lsscripts() {
--	perl -e '
+-	LANG=C perl -e '
 -		$dir=shift;
 -		print join "\n", grep { ! -d $_ && -x $_ }
 -			grep /^\Q$dir\/\E[-a-zA-Z0-9]+$/,
@@ -48,7 +34,7 @@ index 1498b96..68d4765 100755
 +	fi
  done
 diff --git a/pre-commit.d/30store-metadata b/pre-commit.d/30store-metadata
-index 9e2792f..d6afbb6 100755
+index edec06b..f6d65a6 100755
 --- a/pre-commit.d/30store-metadata
 +++ b/pre-commit.d/30store-metadata
 @@ -83,45 +83,29 @@ generate_metadata() {
@@ -116,5 +102,5 @@ index 9e2792f..d6afbb6 100755
  	if [ -f .metadata ]; then
  		# remove obsolete .metadata file
 -- 
-1.9.1
+2.5.4
 
